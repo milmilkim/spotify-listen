@@ -1,3 +1,22 @@
+/**
+ * @함수
+ * getReco({
+ *  token: 토큰 여기다
+ *  seed_artists: 스포티파이id string
+ *  seed-genres: string(','로 구분)
+ *  seed-tracks: 스포티파이id string
+ *  energy: >= 0 <= 1
+ *  loudness: >= 0 <= 1
+ *  danceability: >= 0 <= 1
+ *  valence: >= 0 <= 1
+ * })
+ *
+ * @state
+ * data
+ * isLoading
+ * error
+ */
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BASE_URL } from '../config';

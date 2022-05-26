@@ -1,9 +1,21 @@
+/**
+ * @action
+ * getToken(): 새 토큰 받아서 저장하기
+ * setIsLogin(boolean): isLogin 갱신
+ *
+ * @state
+ * token
+ * isLogin: boolean
+ * isLoading: boolean
+ * error: json
+ * data: json
+ */
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { Buffer } from 'buffer';
 import axios from 'axios';
 const client_id = process.env.REACT_APP_CLIENT_ID;
 const client_secret = process.env.REACT_APP_CLIENT_SECRET;
-
 const auth = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 export const getToken = createAsyncThunk('TokenSlice/getToken', async () => {
   let result = null;
@@ -69,6 +81,6 @@ const TokenSlice = createSlice({
 });
 
 export default TokenSlice.reducer; //리듀서 객체 내보내기
-export const { checkLogin, setToken, setIsLogin } = TokenSlice.actions; //액션 함수 내보내기
+export const { setToken, setIsLogin } = TokenSlice.actions; //액션 함수 내보내기
 
 //엄청..헷갈림!
