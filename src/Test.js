@@ -1,6 +1,9 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getToken, setToken } from './slices/TokenSlice';
+
+import { getAudioFeatures } from './slices/AudioFeaturesSlice';
+import { getTracks } from './slices/TracksSlice';
 
 const Test = memo(() => {
   const { isLogin, token, isLoading } = useSelector((state) => state.token);
@@ -20,6 +23,32 @@ const Test = memo(() => {
       dispatch(setToken(text));
     }
   };
+
+  // 새 토큰 발급버튼을 클릭하면 정상적으로 데이터를 가져오는지 테스트
+  const { data: aData } = useSelector((state) => state.audioFeatures);
+  const { data: tData } = useSelector((state) => state.tracks);
+  useEffect(() => {
+    /**
+    token &&
+      dispatch(
+        getAudioFeatures({
+          ids: '7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B',
+          token,
+        }),
+      );
+    /*/
+    token &&
+      dispatch(
+        getTracks({
+          id: '11dFghVXANMlKmJXsNCbNl',
+          token,
+        })
+      );
+    /**/
+  }, [dispatch, token]);
+  console.log(aData);
+  console.log(tData);
+
   return (
     <div>
       <h1>토큰 테스트</h1>
