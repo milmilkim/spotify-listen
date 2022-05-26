@@ -3,8 +3,9 @@ import { Buffer } from 'buffer';
 import axios from 'axios';
 const client_id = process.env.REACT_APP_CLIENT_ID;
 const client_secret = process.env.REACT_APP_CLIENT_SECRET;
+
 const auth = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-export const getToken = createAsyncThunk('TokenSlice/getToken', async (payload, { rejectWidthValue }) => {
+export const getToken = createAsyncThunk('TokenSlice/getToken', async () => {
   let result = null;
 
   try {
@@ -15,7 +16,7 @@ export const getToken = createAsyncThunk('TokenSlice/getToken', async (payload, 
       },
     });
   } catch (err) {
-    result = rejectWidthValue(err.response);
+    result = err.response;
     console.error(err);
   }
 
@@ -58,6 +59,10 @@ const TokenSlice = createSlice({
       return {
         ...state,
         isLoading: false,
+        error: {
+          code: payload?.status ? payload.status : 500,
+          message: payload?.message ? payload.message : '알 수 없는 오류',
+        },
       };
     },
   },

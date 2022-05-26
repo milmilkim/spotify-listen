@@ -1,6 +1,6 @@
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getToken, setIsLogin, setToken } from './slices/TokenSlice';
+import { getToken, setToken } from './slices/TokenSlice';
 
 const Test = memo(() => {
   const { isLogin, token, isLoading } = useSelector((state) => state.token);
@@ -10,13 +10,6 @@ const Test = memo(() => {
   const handleTokenButton = (e) => {
     dispatch(getToken());
   };
-
-  const handleLoginButton = useCallback(
-    (e) => {
-      dispatch(setIsLogin(!isLogin));
-    },
-    [isLogin, dispatch]
-  );
 
   const handleChange = (e) => {
     setText(e.target.value);
@@ -31,7 +24,6 @@ const Test = memo(() => {
     <div>
       <h1>토큰 테스트</h1>
       <button onClick={handleTokenButton}>새 토큰발급</button>
-      {isLogin ? <button onClick={handleLoginButton}>로그아웃</button> : <button onClick={handleLoginButton}>로그인</button>}
       <br />
       토큰값 설정(엔터): <input type="text" onKeyUp={handleOnKeyUp} onChange={handleChange} />
       {isLoading ? (

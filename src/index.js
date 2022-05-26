@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import App from './App';
 import store from './store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Meta from './Meta';
 
-import Test from './Test';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,8 +13,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <Meta />
-        {/* <App /> */}
-        <Test />
+        <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
