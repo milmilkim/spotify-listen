@@ -18,7 +18,7 @@ const StyledDivider = styled(Divider)`
   }
 `;
 
-const Recommendation = memo(() => {
+const Recommend = memo(() => {
   const { token } = useSelector((state) => state.token);
 
   const [genres, setGenres] = useState([]);
@@ -59,16 +59,16 @@ const Recommendation = memo(() => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(res.data.genres);
       setGenres(res.data.genres);
     })();
-  }, [token]);
+  }, []);
 
   return (
     <>
       <Row style={{ justifyContent: 'space-between' }} align="middle">
         <Col span={15} style={{ position: 'relative' }}>
           {/* 왼쪽 */}
+          {token}
           <StyledDivider orientation="left" orientationMargin="0">
             아티스트/트랙
           </StyledDivider>
@@ -157,4 +157,4 @@ const Recommendation = memo(() => {
   );
 });
 
-export default Recommendation;
+export default Recommend;
