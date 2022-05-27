@@ -1,14 +1,14 @@
 /**
  * @action
- * getToken(): 새 토큰 받아서 저장하기
+ * getToken(): 새 토큰 받아서  token에 저장하기
  * setIsLogin(boolean): isLogin 갱신
  *
  * @state
  * token
- * isLogin: boolean
- * isLoading: boolean
- * error: json
- * data: json
+ * isLogin
+ * isLoading
+ * error
+ * data
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
@@ -19,8 +19,6 @@ const client_secret = process.env.REACT_APP_CLIENT_SECRET;
 const auth = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 export const getToken = createAsyncThunk('TokenSlice/getToken', async () => {
   let result = null;
-
-  console.log('auth: ' + auth);
   try {
     result = await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
       headers: {
@@ -65,7 +63,7 @@ const TokenSlice = createSlice({
         ...state,
         isLoading: false,
         error: null,
-        token: payload.data.access_token,
+        token: payload?.data.access_token,
       };
     },
     [getToken.rejected]: (state, { payload }) => {

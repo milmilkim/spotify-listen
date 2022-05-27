@@ -4,6 +4,7 @@ import { getToken, setToken } from './slices/TokenSlice';
 
 import { getAudioFeatures } from './slices/AudioFeaturesSlice';
 import { getTracks } from './slices/TracksSlice';
+import { Link } from 'react-router-dom';
 
 const Test = memo(() => {
   const { isLogin, token, isLoading } = useSelector((state) => state.token);
@@ -23,8 +24,6 @@ const Test = memo(() => {
       dispatch(setToken(text));
     }
   };
-
-  console.log(process.env.REACT_APP_CLIENT_ID);
 
   // 새 토큰 발급버튼을 클릭하면 정상적으로 데이터를 가져오는지 테스트
   const { data: aData } = useSelector((state) => state.audioFeatures);
@@ -63,6 +62,7 @@ const Test = memo(() => {
         <ul>
           <li>로그인 여부: {isLogin.toString()}</li>
           <li>저장된 토큰: {!!token ? <>{token}</> : '토큰 없음'}</li>
+          <Link to="/recommend">추천</Link>
         </ul>
       )}
     </div>

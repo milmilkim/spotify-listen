@@ -1,15 +1,15 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { getReco } from '../slices/RecommendationSlice';
+import { getReco } from '../slices/RecommendationSlice';
 
-import { Input, Space, Row, Col, Radio, Divider, Slider, Button } from 'antd';
+import { Input, Space, Row, Col, Radio, Divider, Slider, Button, Alert } from 'antd';
 
 import styled from 'styled-components';
 import axios from 'axios';
 
-const { Search } = Input;
+import SearchModal from '../components/SearchModal';
 
-const onSearch = (value) => console.log(value);
+const { Search } = Input;
 
 const StyledDivider = styled(Divider)`
   span {
@@ -20,23 +20,37 @@ const StyledDivider = styled(Divider)`
 
 const Recommend = memo(() => {
   const { token } = useSelector((state) => state.token);
+  const { data } = useSelector((state) => state.recommendation);
 
   const [genres, setGenres] = useState([]);
   const [params, setParams] = useState({
     token: token,
-    seed_artists: null,
-    seed_tracks: null,
-    seed_genres: null,
+    seed_artists: '6RHTUrRF63xao58xh9FXYJ',
+    seed_tracks: '0Q5VnK2DYzRyfqQRJuUtvi',
+    seed_genres: genres,
     energy: 0.5,
     loudness: 0.5,
     danceability: 0.5,
     valence: 0.5,
   });
 
+  const [type, setType] = useState('');
+
+  const [visible, setVisible] = useState(false);
+
+  const onSearchTitle = (e) => {
+    setVisible(true);
+    setType('track');
+  };
+  const onSearchArtist = (e) => {
+    setVisible(true);
+    setType('artist');
+  };
+
   const handleSlider = (value, name) => {
     const nextParams = {
       ...params,
-      [name]: value,
+      [name]: value / 100,
     };
 
     setParams(nextParams);
@@ -51,40 +65,56 @@ const Recommend = memo(() => {
     setParams(nextParams);
   };
 
+  const dispatch = useDispatch();
+
+  const onSubmit = useCallback(
+    (e) => {
+      dispatch(getReco(params));
+      console.log(data);
+    },
+    [data, dispatch]
+  );
+
   useEffect(() => {
-    (async () => {
-      let res = null;
-      res = await axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setGenres(res.data.genres);
-    })();
-  }, []);
+    if (token) {
+      (async () => {
+        let res = null;
+        try {
+          res = await axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setGenres(res.data.genres);
+        } catch (e) {
+          console.error(e);
+        }
+      })();
+    }
+  }, [token]);
 
   return (
     <>
       <Row style={{ justifyContent: 'space-between' }} align="middle">
         <Col span={15} style={{ position: 'relative' }}>
           {/* 왼쪽 */}
-          {token}
           <StyledDivider orientation="left" orientationMargin="0">
-            아티스트/트랙
+            트랙/아티스트
           </StyledDivider>
           <Row>
             <Space size="large">
               <Search
-                placeholder="input search text"
-                onSearch={onSearch}
+                id="title"
+                placeholder="제목"
+                onSearch={onSearchTitle}
                 style={{
                   width: 200,
                 }}
               />
 
               <Search
-                placeholder="input search text"
-                onSearch={onSearch}
+                placeholder="아티스트"
+                onSearch={onSearchArtist}
                 style={{
                   width: 200,
                 }}
@@ -92,20 +122,22 @@ const Recommend = memo(() => {
             </Space>
           </Row>
           <Row>
+            <Alert message={`${params.seed_tracks}-${params.seed_artists}`} type="info" style={{ marginTop: '20px' }} />
+          </Row>
+          <Row>
             <StyledDivider orientation="left" orientationMargin="0">
-              장르
+              선호장르
             </StyledDivider>
-            <Radio.Group name="genres" options={genres} optionType="button" onChange={handleChange} />
+            <Radio.Group name="genres" options={genres} optionType="button" onChange={handleChange} defaultValue="k-pop" />
           </Row>
 
           <Row style={{ justifyContent: 'center' }}>
-            <Button type="primary" size="large" style={{ marginTop: '20px' }}>
+            <Button type="primary" size="large" style={{ marginTop: '20px' }} onClick={onSubmit}>
               추천 검색
             </Button>
           </Row>
         </Col>
         <Col span={9}>
-          {/* energy loudness danceability valence */}
           <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div style={{ display: 'inline-block', height: '300px' }}>
               <Slider
@@ -122,7 +154,7 @@ const Recommend = memo(() => {
                 vertical
                 defaultValue={50}
                 onChange={(e) => {
-                  handleSlider(e, 'loudness');
+                  handleSlider(e, 'liveness');
                 }}
               />
             </div>
@@ -147,12 +179,28 @@ const Recommend = memo(() => {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
             <span style={{ width: '25%', textAlign: 'center' }}>energy</span>
-            <span style={{ width: '25%', textAlign: 'center' }}>loudness</span>
+            <span style={{ width: '25%', textAlign: 'center' }}>liveness</span>
             <span style={{ width: '25%', textAlign: 'center' }}>danceability</span>
             <span style={{ width: '25%', textAlign: 'center' }}>valence</span>
           </div>
         </Col>
       </Row>
+
+      <SearchModal visible={visible} setVisible={setVisible} params={params} setParams={setParams} type={type} />
+
+      {data.tracks && (
+        <>
+          {data.tracks.map(({ name: title, id, artists, album }) => (
+            <ul key={id}>
+              <li>제목: {title}</li>
+              {artists[0].name && <li>아티스트: {artists[0].name}</li>}
+              <li>
+                <img src={album.images[1].url}></img>
+              </li>
+            </ul>
+          ))}
+        </>
+      )}
     </>
   );
 });

@@ -1,7 +1,7 @@
 /**
  * @함수
  * getReco({
- *  token: 토큰 여기다
+ *  token: 토큰
  *  seed_artists: 스포티파이id string
  *  seed-genres: string(','로 구분)
  *  seed-tracks: 스포티파이id string
@@ -31,10 +31,10 @@ export const getReco = createAsyncThunk('RecommendationSlice/getReco', async (pa
         seed_artists: payload.seed_artists,
         seed_genres: payload.seed_genres,
         seed_tracks: payload.seed_tracks,
-        min_energy: payload.energy,
-        min_loudness: payload.loudness,
-        min_danceability: payload.danceability,
-        min_valence: payload.valence,
+        target_energy: payload.energy,
+        target_danceability: payload.danceability,
+        target_valence: payload.valence,
+        target_liveness: payload.liveness,
         limit: 3,
       },
       headers: {
@@ -53,7 +53,7 @@ export const getReco = createAsyncThunk('RecommendationSlice/getReco', async (pa
 const RecommendationSlice = createSlice({
   name: 'recommendation',
   initialState: {
-    data: null,
+    data: { tracks: '' },
     isLoading: false,
     error: null,
   },
@@ -67,7 +67,7 @@ const RecommendationSlice = createSlice({
         ...state,
         isLoading: false,
         error: null,
-        data: payload.data,
+        data: payload?.data,
       };
     },
     [getReco.rejected]: (state, { payload }) => {

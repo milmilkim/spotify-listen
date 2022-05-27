@@ -1,31 +1,12 @@
-/**
- * @함수
- * getTop({
- *  token: 토큰 여기다
- *  seed_artists: 스포티파이id string
- *  seed-genres: string(','로 구분)
- *  seed-tracks: 스포티파이id string
- *  energy: >= 0 <= 1
- *  loudness: >= 0 <= 1
- *  danceability: >= 0 <= 1
- *  valence: >= 0 <= 1
- * })
- *
- * @state
- * data
- * isLoading
- * error
- */
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { BASE_URL } from "../config";
-
-export const getTop = createAsyncThunk("TopSlice/getTop", async (payload) => {
+export const getTop = createAsyncThunk('TopSlice/getTop', async (payload) => {
   let result = null;
 
   try {
-    result = await axios.get("/top/tracks", {
+    result = await axios.get('/top/tracks', {
       baseURL: BASE_URL,
       params: {
         time_range: payload.time_range,
@@ -44,7 +25,7 @@ export const getTop = createAsyncThunk("TopSlice/getTop", async (payload) => {
 });
 
 const TopSlice = createSlice({
-  name: "recommendation",
+  name: 'recommendation',
   initialState: {
     data: null,
     isLoading: false,
@@ -69,7 +50,7 @@ const TopSlice = createSlice({
         isLoading: false,
         error: {
           code: payload?.status ? payload.status : 500,
-          message: payload?.message ? payload.message : "알 수 없는 오류",
+          message: payload?.message ? payload.message : '알 수 없는 오류',
         },
       };
     },

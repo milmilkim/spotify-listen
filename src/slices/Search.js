@@ -17,20 +17,20 @@
  * error
  */
 
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { BASE_URL } from "../config";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
-export const search = createAsyncThunk("SearchSlice/search", async (payload) => {
+export const search = createAsyncThunk('SearchSlice/search', async (payload) => {
   let result = null;
 
   try {
-    result = await axios.get("/search", {
+    result = await axios.get('/search', {
       baseURL: BASE_URL,
       params: {
         q: payload.q,
         type: payload.type || 'tracks',
-        limit: payload.limit
+        limit: payload.limit,
       },
       headers: {
         Authorization: `Bearer ${payload.token}`,
@@ -45,7 +45,7 @@ export const search = createAsyncThunk("SearchSlice/search", async (payload) => 
 });
 
 const SearchSlice = createSlice({
-  name: "search",
+  name: 'search',
   initialState: {
     data: null,
     isLoading: false,
@@ -70,7 +70,7 @@ const SearchSlice = createSlice({
         isLoading: false,
         error: {
           code: payload?.status ? payload.status : 500,
-          message: payload?.message ? payload.message : "알 수 없는 오류",
+          message: payload?.message ? payload.message : '알 수 없는 오류',
         },
       };
     },
