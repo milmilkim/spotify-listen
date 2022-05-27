@@ -20,6 +20,7 @@ const auth = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 export const getToken = createAsyncThunk('TokenSlice/getToken', async () => {
   let result = null;
 
+  console.log('auth: ' + auth);
   try {
     result = await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
       headers: {

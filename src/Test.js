@@ -24,6 +24,8 @@ const Test = memo(() => {
     }
   };
 
+  console.log(process.env.REACT_APP_CLIENT_ID);
+
   // 새 토큰 발급버튼을 클릭하면 정상적으로 데이터를 가져오는지 테스트
   const { data: aData } = useSelector((state) => state.audioFeatures);
   const { data: tData } = useSelector((state) => state.tracks);
