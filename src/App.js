@@ -6,17 +6,15 @@ import { getToken } from './slices/TokenSlice';
 
 import './App.css';
 function App() {
-  const { token, isLoading } = useSelector((state) => state.token);
-  const [text, setText] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getToken());
   }, [dispatch]);
+  //실행되면 토큰먼저 발급 ~_~
 
   return (
     <div className="App">
-      <h1>{token}</h1>
       <Router />
     </div>
   );
