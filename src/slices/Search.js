@@ -29,7 +29,8 @@ export const search = createAsyncThunk("SearchSlice/search", async (payload) => 
       baseURL: BASE_URL,
       params: {
         q: payload.q,
-        limit: 5,
+        type: payload.type || 'tracks',
+        limit: payload.limit
       },
       headers: {
         Authorization: `Bearer ${payload.token}`,
