@@ -1,14 +1,14 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+import styled from 'styled-components';
 
 import { Row, Col, List } from 'antd';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import 'antd/dist/antd.css';
 
 const ListItemContainer = styled.div`
   box-sizing: border-box;
   .ant-row {
     padding: 15px;
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 
     .ant-list-item {
@@ -66,12 +66,12 @@ const ListItemContainer = styled.div`
   }
 `;
 
-const ListItem = ({ imgSrc, mainTitle, subTitle }) => {
+const ListItem = ({ id, imgSrc, mainTitle, subTitle }) => {
   return (
     <ListItemContainer>
       <Col span={24}>
         <Row>
-          <Link to="/">
+          <a href={`/search_result/${id}`}>
             <List.Item>
               {/* 이미지 영역 */}
               <div className="imgContainer">
@@ -88,7 +88,7 @@ const ListItem = ({ imgSrc, mainTitle, subTitle }) => {
                 </div>
               </div>
             </List.Item>
-          </Link>
+          </a>
         </Row>
       </Col>
     </ListItemContainer>
