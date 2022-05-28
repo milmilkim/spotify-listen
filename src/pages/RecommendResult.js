@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { getReco } from '../slices/RecommendationSlice';
 import ListItem from '../components/ListItem';
+import Spinner from '../components/Spinner';
 
 const RecommendResultContainer = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ const RecommendResult = () => {
       <div></div>
 
       <h3 className="recommendResultTitle">추천 결과</h3>
-
+      <Spinner visible={isLoading} />
       <div className="recommendResultList">
         {/* 검색 결과 영역 */}
         {data.tracks &&

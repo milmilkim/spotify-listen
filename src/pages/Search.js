@@ -19,9 +19,9 @@ const SearchContainer = styled.div`
 `;
 
 const Search = () => {
-  const { token } = useSelector((state) => state.token);
+  // const { token } = useSelector((state) => state.token);
   const { data } = useSelector((state) => state.search);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   /* ================================================================= */
   // 데이터가 잘 들어오는지 테스트

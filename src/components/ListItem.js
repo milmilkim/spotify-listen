@@ -65,33 +65,34 @@ const ListItemContainer = styled.div`
   }
 `;
 
-const ListItem = ({ id, imgSrc, mainTitle, subTitle }) => {
+const ListItem = ({ id, imgSrc, mainTitle, subTitle, isLinked }) => {
   return (
     <ListItemContainer>
       <Col span={24}>
         <Row>
-          <a href={`/search_result/${id}`}>
-            <List.Item>
-              {/* 이미지 영역 */}
-              <div className="imgContainer">
-                <img alt="logo" src={imgSrc} />
-              </div>
+          <List.Item style={{ cursor: 'pointer' }}>
+            {/* 이미지 영역 */}
+            <div className="imgContainer">
+              <img alt="logo" src={imgSrc} />
+            </div>
 
-              {/* 텍스트 영역 */}
-              <div className="textContainer">
-                <div className="textTop">
-                  <h3 className="mainTitle">{mainTitle}</h3>
-                </div>
-                <div className="textBottom">
-                  <span className="subTitle">{subTitle}</span>
-                </div>
+            {/* 텍스트 영역 */}
+            <div className="textContainer">
+              <div className="textTop">
+                <h3 className="mainTitle">{mainTitle}</h3>
               </div>
-            </List.Item>
-          </a>
+              <div className="textBottom">
+                <span className="subTitle">{subTitle}</span>
+              </div>
+            </div>
+          </List.Item>
         </Row>
       </Col>
     </ListItemContainer>
   );
 };
 
+ListItem.defaultProps = {
+  isLinked: true,
+};
 export default ListItem;

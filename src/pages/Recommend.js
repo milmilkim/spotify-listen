@@ -20,7 +20,6 @@ const StyledDivider = styled(Divider)`
 
 const Recommend = memo(() => {
   const { token } = useSelector((state) => state.token);
-  const { data, isLoading } = useSelector((state) => state.recommendation);
 
   const [genres, setGenres] = useState([]);
   const [params, setParams] = useState({
@@ -35,17 +34,20 @@ const Recommend = memo(() => {
     valence: 0.5,
   });
 
-  const [type, setType] = useState('');
+  const [search, setSearch] = useState({
+    query: '',
+    title: '',
+    artist: '',
+  });
 
   const [visible, setVisible] = useState(false);
 
-  const onSearchTitle = (e) => {
+  const onSearchTitle = (query) => {
     setVisible(true);
-    setType('track');
-  };
-  const onSearchArtist = (e) => {
-    setVisible(true);
-    setType('artist');
+    setSearch({
+      ...search,
+      query: 'track:' + query,
+    });
   };
 
   const handleSlider = (value, name) => {
@@ -65,8 +67,6 @@ const Recommend = memo(() => {
 
     setParams(nextParams);
   };
-
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -98,7 +98,7 @@ const Recommend = memo(() => {
         <Col span={15} style={{ position: 'relative' }}>
           {/* 왼쪽 */}
           <StyledDivider orientation="left" orientationMargin="0">
-            트랙/아티스트
+            트랙
           </StyledDivider>
           <Row>
             <Space size="large">
@@ -110,18 +110,10 @@ const Recommend = memo(() => {
                   width: 200,
                 }}
               />
-
-              <Search
-                placeholder="아티스트"
-                onSearch={onSearchArtist}
-                style={{
-                  width: 200,
-                }}
-              />
             </Space>
           </Row>
           <Row>
-            <Alert message={`${params.seed_tracks}-${params.seed_artists}`} type="info" style={{ marginTop: '20px' }} />
+            <Alert message={`${search.title}/${search.artist}`} type="info" style={{ marginTop: '20px' }} />
           </Row>
           <Row>
             <StyledDivider orientation="left" orientationMargin="0">
@@ -185,7 +177,7 @@ const Recommend = memo(() => {
         </Col>
       </Row>
 
-      <SearchModal visible={visible} setVisible={setVisible} params={params} setParams={setParams} type={type} />
+      <SearchModal visible={visible} setVisible={setVisible} params={params} setParams={setParams} search={search} setSearch={setSearch} />
 
       {/* {data.tracks && (
         <>
