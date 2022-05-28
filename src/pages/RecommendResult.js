@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-
+import { useLocation } from 'react-router-dom';
 import { getReco } from '../slices/RecommendationSlice';
 import ListItem from '../components/ListItem';
 
@@ -24,23 +24,13 @@ const RecommendResultContainer = styled.div`
 `;
 
 const RecommendResult = () => {
-  const { token } = useSelector((state) => state.token);
-  const { data } = useSelector((state) => state.recommendation);
   const dispatch = useDispatch();
+  const { state: params } = useLocation();
+  const { data, isLoading } = useSelector((state) => state.recommendation);
 
-  /* ================================================================= */
-  // 데이터가 잘 들어오는지 테스트
   useEffect(() => {
-    dispatch(
-      getReco({
-        seed_artists: '4NHQUGzhtTLFvgF5SZesLK',
-        seed_genres: 'classical,country',
-        seed_tracks: '0c6xIDDpzE81m2q797ordA',
-        token,
-      }),
-    );
-  }, [dispatch, token]);
-  /* ================================================================= */
+    dispatch(getReco(params));
+  }, [dispatch, params]);
 
   return (
     <RecommendResultContainer>
@@ -58,13 +48,7 @@ const RecommendResult = () => {
             album.artists.map((v2, i2) => (artistsName += v2.name + ' '));
 
             return (
-              <ListItem
-                key={i}
-                id={id} /* 앨범 고유 아이디 */
-                imgSrc={album.images[1].url} /* 중간사이즈 이미지 */
-                mainTitle={album.name} /* 앨범 이름 */
-                subTitle={artistsName} /* 아티스트 이름 */
-              />
+              <ListItem key={i} id={id} /* 앨범 고유 아이디 */ imgSrc={album.images[1].url} /* 중간사이즈 이미지 */ mainTitle={album.name} /* 앨범 이름 */ subTitle={artistsName} /* 아티스트 이름 */ />
             );
           })}
       </div>

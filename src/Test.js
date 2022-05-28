@@ -63,6 +63,7 @@ const Test = memo(() => {
           <li>로그인 여부: {isLogin.toString()}</li>
           <li>저장된 토큰: {!!token ? <>{token}</> : '토큰 없음'}</li>
           <Link to="/recommend">추천</Link>
+          <Link to="/search">검색</Link>
         </ul>
       )}
     </div>

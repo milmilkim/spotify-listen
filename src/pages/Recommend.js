@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getReco } from '../slices/RecommendationSlice';
-
+import { useNavigate } from 'react-router-dom';
 import { Input, Space, Row, Col, Radio, Divider, Slider, Button, Alert } from 'antd';
 
 import styled from 'styled-components';
@@ -20,7 +20,7 @@ const StyledDivider = styled(Divider)`
 
 const Recommend = memo(() => {
   const { token } = useSelector((state) => state.token);
-  const { data } = useSelector((state) => state.recommendation);
+  const { data, isLoading } = useSelector((state) => state.recommendation);
 
   const [genres, setGenres] = useState([]);
   const [params, setParams] = useState({
@@ -68,13 +68,11 @@ const Recommend = memo(() => {
 
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback(
-    (e) => {
-      dispatch(getReco(params));
-      console.log(data);
-    },
-    [data, dispatch, params]
-  );
+  const navigate = useNavigate();
+
+  const onSubmit = useCallback((e) => {
+    navigate('/recommend_result', { state: params });
+  });
 
   useEffect(() => {
     if (token) {
@@ -189,7 +187,7 @@ const Recommend = memo(() => {
 
       <SearchModal visible={visible} setVisible={setVisible} params={params} setParams={setParams} type={type} />
 
-      {data.tracks && (
+      {/* {data.tracks && (
         <>
           {data.tracks.map(({ name: title, id, artists, album }) => (
             <ul key={id}>
@@ -201,7 +199,7 @@ const Recommend = memo(() => {
             </ul>
           ))}
         </>
-      )}
+      )} */}
     </>
   );
 });

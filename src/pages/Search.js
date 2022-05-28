@@ -25,16 +25,16 @@ const Search = () => {
 
   /* ================================================================= */
   // 데이터가 잘 들어오는지 테스트
-  useEffect(() => {
-    dispatch(
-      search({
-        q: 'track:falling slowly',
-        type: 'track',
-        limit: '3',
-        token: { token },
-      })
-    );
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(
+  //     search({
+  //       q: 'track:falling slowly',
+  //       type: 'track',
+  //       limit: '3',
+  //       token: { token },
+  //     })
+  //   );
+  // }, [dispatch, token]);
   /* ================================================================= */
 
   return (

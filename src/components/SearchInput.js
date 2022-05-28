@@ -43,7 +43,7 @@ const SearchInput = ({ children }) => {
   const onSearch = (value) => {
     const nextParams = {
       ...params,
-      q: encodeURIComponent(value), //검색어
+      q: 'track:' + value, //검색어
     };
     setParams(nextParams);
   };
@@ -56,13 +56,7 @@ const SearchInput = ({ children }) => {
     <SearchInputContainer>
       {children}
       {/* SearchInput 영역 */}
-      <Search
-        placeholder="제목을 입력하세요."
-        allowClear
-        enterButton="Search"
-        size="large"
-        onSearch={onSearch}
-      />
+      <Search placeholder="제목을 입력하세요." allowClear enterButton="Search" size="large" onSearch={onSearch} />
     </SearchInputContainer>
   );
 };
