@@ -25,8 +25,9 @@ const Recommend = memo(() => {
   const [genres, setGenres] = useState([]);
   const [params, setParams] = useState({
     token: token,
-    seed_artists: '6RHTUrRF63xao58xh9FXYJ',
-    seed_tracks: '0Q5VnK2DYzRyfqQRJuUtvi',
+    /* 기본값 */
+    seed_artists: '6RHTUrRF63xao58xh9FXYJ', //아이브
+    seed_tracks: '0Q5VnK2DYzRyfqQRJuUtvi', //러브 다이브 (그냥 내가 좋아해서)
     seed_genres: genres,
     energy: 0.5,
     loudness: 0.5,
@@ -50,7 +51,7 @@ const Recommend = memo(() => {
   const handleSlider = (value, name) => {
     const nextParams = {
       ...params,
-      [name]: value / 100,
+      [name]: value / 100, //100으로 나눠서 0이상 1이하의 값으로 바꿈
     };
 
     setParams(nextParams);
@@ -72,7 +73,7 @@ const Recommend = memo(() => {
       dispatch(getReco(params));
       console.log(data);
     },
-    [data, dispatch]
+    [data, dispatch, params]
   );
 
   useEffect(() => {

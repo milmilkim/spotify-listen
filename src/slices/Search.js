@@ -47,7 +47,9 @@ export const search = createAsyncThunk('SearchSlice/search', async (payload) => 
 const SearchSlice = createSlice({
   name: 'search',
   initialState: {
-    data: null,
+    data: {
+      trakcs: '',
+    },
     isLoading: false,
     error: null,
   },

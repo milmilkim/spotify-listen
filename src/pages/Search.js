@@ -31,9 +31,8 @@ const Search = () => {
         q: 'track:falling slowly',
         type: 'track',
         limit: '3',
-        token:
-          'BQDRlCaGOv2kVFEiwVZWzmmu-g-Jdaqh4kE0euzI0EG3guNlLc5otZFwGrSCkRQA_r9qMCldGz44xj7qC3_koey4RuOS9wO6fqjjK0OyrQCwnCAp4jEI4GP0F69H8vsIMI427qSfi_5JARWjoRrYuvwUnBFchfub0PfRLWpvXp4an2_5XR91WgJOsAXVH7yBCUHCGo5pXTE876sTaiURoqEGqu3qUB6eY7F8x3_BPG3mo818Ilij8KzKHIbnskN3TZIH',
-      }),
+        token: { token },
+      })
     );
   }, [dispatch]);
   /* ================================================================= */
@@ -50,21 +49,13 @@ const Search = () => {
 
       {/* 검색 결과 영역 */}
       <div className="searchList">
-        {data &&
+        {data.tracks &&
           data.tracks.items.map(({ album, id, name }, i) => {
             /* 한 앨범의 아티스트가 여러명일 수 있기 때문에 반복을 돌아 문자열로 처리했습니다. */
             let artistsName = '';
             album.artists.map((v2, i2) => (artistsName += v2.name + ' '));
 
-            return (
-              <ListItem
-                key={i}
-                id={id} /* 곡 고유 아이디 */
-                imgSrc={album.images[1].url} /* 중간사이즈 이미지 */
-                mainTitle={name} /* 곡 이름 */
-                subTitle={artistsName} /* 아티스트 이름 */
-              />
-            );
+            return <ListItem key={i} id={id} /* 곡 고유 아이디 */ imgSrc={album.images[1].url} /* 중간사이즈 이미지 */ mainTitle={name} /* 곡 이름 */ subTitle={artistsName} /* 아티스트 이름 */ />;
           })}
       </div>
     </SearchContainer>

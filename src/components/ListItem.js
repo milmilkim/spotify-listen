@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Row, Col, List } from 'antd';
-import 'antd/dist/antd.css';
 
 const ListItemContainer = styled.div`
   box-sizing: border-box;
