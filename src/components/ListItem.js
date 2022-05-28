@@ -5,6 +5,7 @@ import { Row, Col, List } from 'antd';
 
 const ListItemContainer = styled.div`
   box-sizing: border-box;
+  background-color: #f9f9f9;
   .ant-row {
     padding: 15px;
     border-right: 1px solid rgba(0, 0, 0, 0.06);
@@ -35,16 +36,18 @@ const ListItemContainer = styled.div`
       .textContainer {
         display: flex;
         flex-direction: column;
+
         .textTop {
           display: flex;
           align-items: baseline;
           margin-bottom: 0.125rem;
-          font-size: 1.125rem;
+          font-size: 1.438rem;
           line-height: 1.5;
           letter-spacing: -0.05rem;
 
           .mainTitle {
             margin-right: 0.5rem;
+            margin-bottom: 0.5em;
             font-weight: bold;
           }
         }
@@ -52,7 +55,7 @@ const ListItemContainer = styled.div`
         .textBottom {
           display: flex;
           align-items: baseline;
-          font-size: 0.875rem;
+          font-size: 1.125rem;
           line-height: 1.5;
           letter-spacing: -0.025rem;
 
@@ -60,12 +63,42 @@ const ListItemContainer = styled.div`
             margin-right: 0.5rem;
           }
         }
+
+        .textExtra {
+          .duration {
+            font-size: 0.875rem;
+          }
+
+          .releaseDate {
+            font-size: 0.75rem;
+          }
+        }
       }
     }
   }
 `;
 
-const ListItem = ({ id, imgSrc, mainTitle, subTitle }) => {
+/* 곡 재생시간(밀리초)를 분과 초로 변환하는 함수 */
+function convertMs(ms) {
+  let duration = '';
+  let min = parseInt((ms / (1000 * 60)) % 60);
+  let sec = parseInt((ms / 1000) % 60);
+
+  min = min < 10 ? '0' + min : min;
+  sec = sec < 10 ? '0' + sec : sec;
+  duration = `${min} : ${sec}`;
+
+  return duration;
+}
+
+const ListItem = ({
+  id,
+  imgSrc,
+  mainTitle,
+  subTitle,
+  duration,
+  releaseDate,
+}) => {
   return (
     <ListItemContainer>
       <Col span={24}>
@@ -84,6 +117,15 @@ const ListItem = ({ id, imgSrc, mainTitle, subTitle }) => {
                 </div>
                 <div className="textBottom">
                   <span className="subTitle">{subTitle}</span>
+                </div>
+                <div className="textExtra">
+                  {duration && (
+                    <span className="duration">{convertMs(duration)}</span>
+                  )}
+                  <br />
+                  {releaseDate && (
+                    <span className="releaseDate">{releaseDate}</span>
+                  )}
                 </div>
               </div>
             </List.Item>

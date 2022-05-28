@@ -14,6 +14,7 @@ const RecommendResultContainer = styled.div`
 
   .recommendResultTitle {
     font-size: 2rem;
+    font-weight: bold;
     padding: 15px;
     margin-bottom: 0;
   }
@@ -49,7 +50,13 @@ const RecommendResult = () => {
             album.artists.map((v2, i2) => (artistsName += v2.name + ' '));
 
             return (
-              <ListItem key={i} id={id} /* 앨범 고유 아이디 */ imgSrc={album.images[1].url} /* 중간사이즈 이미지 */ mainTitle={album.name} /* 앨범 이름 */ subTitle={artistsName} /* 아티스트 이름 */ />
+              <ListItem
+                key={i}
+                id={id}
+                /* 앨범 고유 아이디 */ imgSrc={album.images[1].url}
+                /* 중간사이즈 이미지 */ mainTitle={album.name}
+                /* 앨범 이름 */ subTitle={artistsName} /* 아티스트 이름 */
+              />
             );
           })}
       </div>
