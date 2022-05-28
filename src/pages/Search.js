@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 import ListItem from '../components/ListItem';
 import SearchInput from '../components/SearchInput';
-import { search } from '../slices/Search';
+// import { search } from '../slices/Search';
+
+import { Link } from 'react-router-dom';
 
 const SearchContainer = styled.div`
   display: flex;
@@ -55,7 +57,11 @@ const Search = () => {
             let artistsName = '';
             album.artists.map((v2, i2) => (artistsName += v2.name + ' '));
 
-            return <ListItem key={i} id={id} /* 곡 고유 아이디 */ imgSrc={album.images[1].url} /* 중간사이즈 이미지 */ mainTitle={name} /* 곡 이름 */ subTitle={artistsName} /* 아티스트 이름 */ />;
+            return (
+              <Link to={`/search_result/${id}`}>
+                <ListItem key={i} id={id} /* 곡 고유 아이디 */ imgSrc={album.images[1].url} /* 중간사이즈 이미지 */ mainTitle={name} /* 곡 이름 */ subTitle={artistsName} /* 아티스트 이름 */ />
+              </Link>
+            );
           })}
       </div>
     </SearchContainer>
