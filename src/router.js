@@ -5,7 +5,7 @@ import Receipt from './pages/Receipt';
 import Recommend from './pages/Recommend';
 import RecommendResult from './pages/RecommendResult';
 import Search from './pages/Search';
-// import SearchResult from './pages/SearchResult';
+import SearchResult from './pages/SearchResult';
 
 const Router = () => {
   return (
@@ -16,7 +16,7 @@ const Router = () => {
       <Route path="/recommend" element={<Recommend />} />
       <Route path="/recommend_result" element={<RecommendResult />} />
       <Route path="/search" element={<Search />} />
-      {/* <Route path="/search_result/*" element={<SearchResult />} /> */}
+      <Route path="/search_result/:id/" element={<SearchResult />} />
     </Routes>
   );
 };
