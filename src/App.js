@@ -11,7 +11,6 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_CLIENT_ID);
     dispatch(getToken());
   }, [dispatch]);
   //실행되면 토큰먼저 발급 ~_~
