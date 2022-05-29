@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { PlayCircleOutlined } from '@ant-design/icons';
-import { ResponsiveRadar } from '@nivo/radar';
 
 import ListItem from '../components/ListItem';
 import { getTracks } from '../slices/TracksSlice';
 import { Button } from 'antd';
 import { getAudioFeatures } from '../slices/AudioFeaturesSlice';
+import Chart from '../components/Chart';
 
 const SearchResultContainer = styled.div`
   display: flex;
@@ -102,45 +102,7 @@ const SearchResult = () => {
       </div>
 
       {/* radar 그래프 */}
-      <div style={{ width: '600px', height: '600px' }}>
-        <ResponsiveRadar
-          data={data}
-          keys={['value']}
-          indexBy="label"
-          maxValue={1}
-          valueFormat=">-.2f"
-          margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
-          borderColor={{ from: 'color' }}
-          gridLabelOffset={36}
-          dotSize={10}
-          dotColor={{ theme: 'background' }}
-          dotBorderWidth={2}
-          colors={['#1ED760']}
-          blendMode="multiply"
-          motionConfig="wobbly"
-          legends={[
-            {
-              anchor: 'top-left',
-              direction: 'column',
-              translateX: -50,
-              translateY: -40,
-              itemWidth: 80,
-              itemHeight: 20,
-              itemTextColor: '#999',
-              symbolSize: 12,
-              symbolShape: 'circle',
-              effects: [
-                {
-                  on: 'hover',
-                  style: {
-                    itemTextColor: '#000',
-                  },
-                },
-              ],
-            },
-          ]}
-        />
-      </div>
+      <Chart data={data} />
     </SearchResultContainer>
   );
 };
