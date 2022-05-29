@@ -6,7 +6,7 @@ export const getTop = createAsyncThunk('TopSlice/getTop', async (payload) => {
   let result = null;
 
   try {
-    result = await axios.get('/top/tracks', {
+    result = await axios.get('me/top/tracks', {
       baseURL: BASE_URL,
       params: {
         time_range: payload.time_range,

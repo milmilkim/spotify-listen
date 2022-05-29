@@ -6,29 +6,26 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // export const token = 'BQBraWqP--22IgYuYb0jPXb6_ucL0LuLo-SIsxvS2MvPs3BhtalorKrrLoj-eOzyAxzEldOY9VyUPBD6MhGbwgTWsHtTGijX-37tOIJhj7CEvqCU0qX2vg7Gsb1vEwzhl1-GyPya2i8rz_f8Fz2D26LBusypbHIGfNWZhXZPMFnerA3Al31NBPn1afn3I0hYzSoXMW3dxbXdrtOh-lQHawlY4mYw_eyDRtokKgTX28V5nO1nTbsnFA';
 /* ========================================================== */
 
-const API_URL = `https://api.spotify.com/v1/tracks`;
+const API_URL = `https://api.spotify.com/v1/me/top/tracks`;
 
-export const getTracks = createAsyncThunk(
-  'Tracks/getTracks',
-  async (payload, { rejectWithValue }) => {
-    let result = null;
+export const getTracks = createAsyncThunk('Tracks/getTracks', async (payload, { rejectWithValue }) => {
+  let result = null;
 
-    try {
-      result = await axios.get(`${API_URL}/${payload.id}`, {
-        params: {
-          market: payload.market || 'ES',
-        },
-        headers: {
-          Authorization: `Bearer ${payload.token}`, // <-- 하드코딩한 값으로 테스트 시, `token`을 사용합니다.
-        },
-      });
-    } catch (e) {
-      result = rejectWithValue(e.response);
-    }
+  try {
+    result = await axios.get(`${API_URL}/${payload.id}`, {
+      params: {
+        market: payload.market || 'ES',
+      },
+      headers: {
+        Authorization: `Bearer ${payload.token}`, // <-- 하드코딩한 값으로 테스트 시, `token`을 사용합니다.
+      },
+    });
+  } catch (e) {
+    result = rejectWithValue(e.response);
+  }
 
-    return result;
-  },
-);
+  return result;
+});
 
 const Tracks = createSlice({
   name: 'tracks',

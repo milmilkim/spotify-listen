@@ -2,6 +2,7 @@
  * @action
  * getToken(): 새 토큰 받아서  token에 저장하기
  * setIsLogin(boolean): isLogin 갱신
+ * setToken(): 토큰 설정
  *
  * @state
  * token
