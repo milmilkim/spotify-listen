@@ -1,15 +1,20 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
-import Receipt from "../pages/Receipt";
-// import Search from "../pages/Search";
-import Recommendation from "../pages/Recommendation";
+import Receipt from '../pages/Receipt';
+import Search from '../pages/Search';
+import Recommend from '../pages/Recommend';
+import RecommendResult from '../pages/RecommendResult';
+import SearchResult from '../pages/SearchResult';
+import Main from '../pages/Main';
 
 const Router = () => {
   return (
     <Routes>
-      <Route path="/receipt" element={<Receipt />} />
-      {/* <Route path="/search" element={<Search />} /> */}
-      <Route path="recommendation" element={<Recommendation />} />
+      <Route path="/" element={<Main />} />
+      <Route path="/recommend" element={<Recommend />} />
+      <Route path="/recommend_result" element={<RecommendResult />} />
+      <Route path="/search" element={<Search />} />
+      <Route path="/search_result/:id/" element={<SearchResult />} />
     </Routes>
   );
 };

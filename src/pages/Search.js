@@ -11,9 +11,15 @@ const SearchContainer = styled.div`
   justify-content: center;
   align-items: center;
 
+  .searchInputTitle {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
   .searchList {
     width: 75vw;
     border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
   }
 `;
 

@@ -1,9 +1,12 @@
-import Router from './router';
-import { useEffect, useState, memo } from 'react';
+import Router from './components/Router';
+import { useEffect, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { getToken } from './slices/TokenSlice';
+import Header from './components/Header';
+import Content from './components/Content';
+import Footer from './components/Footer';
 
-import './App.css';
+import './App.less';
 function App() {
   const dispatch = useDispatch();
 
@@ -14,7 +17,11 @@ function App() {
 
   return (
     <div className="App">
-      <Router />
+      <Header />
+      <Content>
+        <Router />
+      </Content>
+      <Footer />
     </div>
   );
 }

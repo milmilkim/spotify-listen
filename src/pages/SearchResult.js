@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { PlayCircleOutlined } from '@ant-design/icons';
 import { ResponsiveRadar } from '@nivo/radar';
 
 import ListItem from '../components/ListItem';
 import { getTracks } from '../slices/TracksSlice';
+import { Button } from 'antd';
 
 const SearchResultContainer = styled.div`
   display: flex;
@@ -17,6 +18,12 @@ const SearchResultContainer = styled.div`
   .searchList {
     width: 75vw;
     border: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 25px;
+  }
+
+  .playBtn {
+    width: 75vw;
+    margin-bottom: 25px;
   }
 `;
 
@@ -57,8 +64,23 @@ const SearchResult = () => {
             imgSrc={tracksData.album.images[1].url} /* 중간사이즈 이미지 */
             mainTitle={tracksData.name} /* 곡 이름 */
             subTitle={artistsName} /* 아티스트 이름 */
+            duration={tracksData.duration_ms} /* 곡 재생 시간 (밀리초) */
+            releaseDate={tracksData.album.release_date} /* 발매일 */
           />
         )}
+      </div>
+
+      {/* 스포티파이 재생 */}
+      <div className="playBtn">
+        <Button
+          type="primary"
+          icon={<PlayCircleOutlined />}
+          size="large"
+          href={tracksData?.external_urls?.spotify}
+          target="_blank"
+        >
+          스포티파이에서 재생
+        </Button>
       </div>
 
       {/* radar 그래프 */}

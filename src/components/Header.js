@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from "react";
-import styled from "styled-components";
+import React, { Fragment, useState } from 'react';
+import styled from 'styled-components';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const HeaderContainer = styled.header`
   text-align: center;
@@ -51,7 +51,7 @@ const Header = () => {
               <Link to="/search">곡검색</Link>
             </li>
             <li>
-              <Link to="/recommendation">추천</Link>
+              <Link to="/recommend">추천</Link>
             </li>
           </ul>
         </nav>

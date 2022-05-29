@@ -1,6 +1,5 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getReco } from '../slices/RecommendationSlice';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Input, Space, Row, Col, Radio, Divider, Slider, Button, Alert } from 'antd';
 
@@ -46,7 +45,7 @@ const Recommend = memo(() => {
     setVisible(true);
     setSearch({
       ...search,
-      query: 'track:' + query,
+      query: query,
     });
   };
 
@@ -70,9 +69,12 @@ const Recommend = memo(() => {
 
   const navigate = useNavigate();
 
-  const onSubmit = useCallback((e) => {
-    navigate('/recommend_result', { state: params });
-  });
+  const onSubmit = useCallback(
+    (e) => {
+      navigate('/recommend_result', { state: params });
+    },
+    [params, navigate]
+  );
 
   useEffect(() => {
     if (token) {
@@ -94,7 +96,7 @@ const Recommend = memo(() => {
 
   return (
     <>
-      <Row style={{ justifyContent: 'space-between' }} align="middle">
+      <Row style={{ justifyContent: 'space-between', width: '75vw', margin: 'auto' }} align="middle">
         <Col span={15} style={{ position: 'relative' }}>
           {/* 왼쪽 */}
           <StyledDivider orientation="left" orientationMargin="0">
@@ -138,7 +140,7 @@ const Recommend = memo(() => {
                 onChange={(e) => {
                   handleSlider(e, 'energy');
                 }}
-              ></Slider>
+              />
             </div>
             <div style={{ display: 'inline-block' }}>
               <Slider

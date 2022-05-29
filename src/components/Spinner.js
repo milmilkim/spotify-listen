@@ -39,7 +39,7 @@ function Spinner({ visible, color, width, height }) {
 
 Spinner.defaultProps = {
   visible: false,
-  color: '#06f',
+  color: '#1ED760',
   width: 100,
   height: 100,
 };
