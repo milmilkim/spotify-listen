@@ -96,7 +96,7 @@ const Recommend = memo(() => {
 
   return (
     <>
-      <Row style={{ justifyContent: 'space-between', width: '75vw', margin: 'auto' }} align="middle">
+      <Row style={{ justifyContent: 'space-between' }} align="middle">
         <Col span={15} style={{ position: 'relative' }}>
           {/* 왼쪽 */}
           <StyledDivider orientation="left" orientationMargin="0">

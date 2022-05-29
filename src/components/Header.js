@@ -45,7 +45,7 @@ const Header = () => {
         <nav>
           <ul className="flex-row">
             <li>
-              <Link to="/receipt">영수증</Link>
+              <Link to="/login">영수증</Link>
             </li>
             <li>
               <Link to="/search">곡검색</Link>
