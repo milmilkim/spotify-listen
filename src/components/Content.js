@@ -5,7 +5,6 @@ import Router from "./Router";
 
 const ContentContainer = styled.main`
   display: block;
-  height: 300px;
 `;
 
 const Content = () => {

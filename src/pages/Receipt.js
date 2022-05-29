@@ -6,7 +6,6 @@ import ReceiptLogin from "../components/ReceiptLogin";
 const Receipt = () => {
   return (
     <div>
-      <ReceiptLogin />
       <ReceiptMaking />
     </div>
   );
