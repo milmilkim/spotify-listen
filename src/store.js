@@ -4,6 +4,7 @@ import RecommendationSlice from './slices/RecommendationSlice';
 import AudioFeaturesSlice from './slices/AudioFeaturesSlice';
 import TracksSlice from './slices/TracksSlice';
 import SearchSlice from './slices/Search';
+import TopSlice from './slices/Top';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     audioFeatures: AudioFeaturesSlice,
     tracks: TracksSlice,
     search: SearchSlice,
+    top: TopSlice,
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
