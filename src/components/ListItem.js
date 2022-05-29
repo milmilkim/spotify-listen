@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import { Row, Col, List } from 'antd';
 
+import { Link } from 'react-router-dom';
+
 const ListItemContainer = styled.div`
   box-sizing: border-box;
   background-color: #f9f9f9;
@@ -91,19 +93,12 @@ function convertMs(ms) {
   return duration;
 }
 
-const ListItem = ({
-  id,
-  imgSrc,
-  mainTitle,
-  subTitle,
-  duration,
-  releaseDate,
-}) => {
+const ListItem = ({ id, imgSrc, mainTitle, subTitle, duration, releaseDate }) => {
   return (
     <ListItemContainer>
       <Col span={24}>
-        <Row>
-          <a href={`/search_result/${id}`}>
+        <Link to={`/search_result/${id}`}>
+          <Row>
             <List.Item>
               {/* 이미지 영역 */}
               <div className="imgContainer">
@@ -119,18 +114,14 @@ const ListItem = ({
                   <span className="subTitle">{subTitle}</span>
                 </div>
                 <div className="textExtra">
-                  {duration && (
-                    <span className="duration">{convertMs(duration)}</span>
-                  )}
+                  {duration && <span className="duration">{convertMs(duration)}</span>}
                   <br />
-                  {releaseDate && (
-                    <span className="releaseDate">{releaseDate}</span>
-                  )}
+                  {releaseDate && <span className="releaseDate">{releaseDate}</span>}
                 </div>
               </div>
             </List.Item>
-          </a>
-        </Row>
+          </Row>
+        </Link>
       </Col>
     </ListItemContainer>
   );

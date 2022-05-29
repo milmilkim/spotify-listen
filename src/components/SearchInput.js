@@ -6,6 +6,8 @@ import { search } from '../slices/Search';
 import { Button, Form, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
+import { useLocation, useNavigate } from 'react-router-dom';
+
 const SearchInputContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -36,6 +38,8 @@ const SearchInputContainer = styled.div`
 const SearchInput = ({ children }) => {
   const { token } = useSelector((state) => state.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [params, setParams] = useState({
     q: 'track:', // 검색어
@@ -53,25 +57,23 @@ const SearchInput = ({ children }) => {
       };
       setParams(nextParams);
     },
-    [params, token],
+    [params, token]
   );
 
   // 검색 submit 이벤트
   const onSubmit = useCallback(() => {
     dispatch(search(params)); // 새로운 값을 dispatch한다.
-  }, [dispatch, params]);
+    if (pathname !== '/search') {
+      navigate('/search');
+    }
+  }, [dispatch, params, navigate, pathname]);
 
   return (
     <SearchInputContainer>
       {children}
       {/* SearchInput 영역 */}
       <Form onFinish={onSubmit}>
-        <Input
-          placeholder="제목을 입력하세요."
-          allowClear
-          size="large"
-          onChange={onSearch}
-        />
+        <Input placeholder="제목을 입력하세요." allowClear size="large" onChange={onSearch} />
         <Button type="primary" htmlType="submit" icon={<SearchOutlined />}>
           Search
         </Button>

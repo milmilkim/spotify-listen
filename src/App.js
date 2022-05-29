@@ -1,5 +1,5 @@
 import Router from './components/Router';
-import { useEffect, useState, memo } from 'react';
+import { useEffect, memo } from 'react';
 import { useDispatch } from 'react-redux';
 import { getToken } from './slices/TokenSlice';
 import Header from './components/Header';
