@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const FooterContainer = styled.footer`
   hr {
@@ -34,20 +34,16 @@ const Footer = () => {
       <div className="inner">
         <hr />
         <div className="flex-row">
-          <div>
-            <a href="#" className="logo">
+          <div>{/* <a href="#" className="logo">
               <span className="blind-text">repository</span>
-            </a>
-          </div>
+            </a> */}</div>
           <div>
             <p>버그 신고 및 기타 문의 misoriu@gmail.com</p>
             <p>본 사이트는 영리목적 없이 개인 프로젝트의 일환으로 제작되었습니다.</p>
           </div>
-          <div>
-            <a href="#" className="logo">
+          <div>{/* <a href="#" className="logo">
               <span className="blind-text">repository</span>
-            </a>
-          </div>
+            </a> */}</div>
         </div>
       </div>
     </FooterContainer>

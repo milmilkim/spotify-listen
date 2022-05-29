@@ -27,7 +27,9 @@ export const getTop = createAsyncThunk('TopSlice/getTop', async (payload) => {
 const TopSlice = createSlice({
   name: 'recommendation',
   initialState: {
-    data: null,
+    data: {
+      items: '',
+    },
     isLoading: false,
     error: null,
   },

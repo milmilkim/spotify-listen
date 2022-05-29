@@ -52,19 +52,13 @@ const SearchResult = () => {
     });
 
   let data = newArr.filter(
-    (v) =>
-      v['label'] === 'danceability' ||
-      v['label'] === 'energy' ||
-      v['label'] === 'valence',
+    (v) => v['label'] === 'danceability' || v['label'] === 'energy' || v['label'] === 'valence'
     // v['label'] === 'loudness', // 음수라 그래프가 생각대로 나오지 않아 제외했습니다.
   );
 
   /* 한 앨범의 아티스트가 여러명일 수 있기 때문에 반복을 돌아 문자열로 처리했습니다. */
   let artistsName = '';
-  tracksData &&
-    tracksData?.album?.artists.map(
-      (aritst) => (artistsName += aritst.name + ''),
-    );
+  tracksData && tracksData?.album?.artists.map((aritst) => (artistsName += aritst.name + ''));
 
   useEffect(() => {
     token &&
@@ -72,7 +66,7 @@ const SearchResult = () => {
         getTracks({
           id,
           token,
-        }),
+        })
       );
 
     token &&
@@ -80,7 +74,7 @@ const SearchResult = () => {
         getAudioFeatures({
           ids: id,
           token,
-        }),
+        })
       );
   }, [dispatch, id, token]);
 
@@ -102,13 +96,7 @@ const SearchResult = () => {
 
       {/* 스포티파이 재생 */}
       <div className="playBtn">
-        <Button
-          type="primary"
-          icon={<PlayCircleOutlined />}
-          size="large"
-          href={tracksData?.external_urls?.spotify}
-          target="_blank"
-        >
+        <Button type="primary" icon={<PlayCircleOutlined />} size="large" href={tracksData?.external_urls?.spotify} target="_blank">
           스포티파이에서 재생
         </Button>
       </div>

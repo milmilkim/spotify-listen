@@ -19,7 +19,7 @@ const StyledRow = styled(Row)`
 function Main() {
   const dispatch = useDispatch();
 
-  const { data, isLoading, error } = useSelector((state) => state.search);
+  const { data, isLoading } = useSelector((state) => state.search);
   const { token } = useSelector((state) => state.token);
 
   useEffect(() => {

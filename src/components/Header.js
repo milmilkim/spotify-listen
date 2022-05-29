@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
@@ -32,16 +32,10 @@ const HeaderContainer = styled.header`
 `;
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(true);
-
   return (
     <HeaderContainer>
       <div className="inner">
-        <h1 className="title">
-          Bye
-          <br />
-          World
-        </h1>
+        <h1 className="title">들어보세요...</h1>
         <nav>
           <ul className="flex-row">
             <li>

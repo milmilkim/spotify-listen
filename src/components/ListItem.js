@@ -81,7 +81,7 @@ const ListItemContainer = styled.div`
 `;
 
 /* 곡 재생시간(밀리초)를 분과 초로 변환하는 함수 */
-function convertMs(ms) {
+export function convertMs(ms) {
   let duration = '';
   let min = parseInt((ms / (1000 * 60)) % 60);
   let sec = parseInt((ms / 1000) % 60);

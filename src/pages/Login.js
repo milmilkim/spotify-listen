@@ -1,4 +1,5 @@
 import { redirect_uri } from '../config';
+import { Button } from 'antd';
 
 const client_id = process.env.REACT_APP_CLIENT_ID;
 
@@ -13,8 +14,9 @@ url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
 function Login() {
   return (
     <>
-      <h2>Login</h2>
-      <a href={url}>여기를 눌러 로그인하세요~~~~!!</a>
+      <a href={url}>
+        <Button type="primary">스포티파이로 로그인</Button>
+      </a>
     </>
   );
 }
