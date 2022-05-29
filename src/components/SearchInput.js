@@ -52,7 +52,7 @@ const SearchInput = ({ children }) => {
     (e) => {
       const nextParams = {
         ...params,
-        q: 'track:' + e.target.value, //검색어
+        q: e.target.value, //검색어
         token: token, // 토큰
       };
       setParams(nextParams);

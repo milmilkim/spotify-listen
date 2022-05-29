@@ -45,7 +45,7 @@ const Recommend = memo(() => {
     setVisible(true);
     setSearch({
       ...search,
-      query: 'track:' + query,
+      query: query,
     });
   };
 
