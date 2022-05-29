@@ -6,7 +6,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 // export const token = 'BQBraWqP--22IgYuYb0jPXb6_ucL0LuLo-SIsxvS2MvPs3BhtalorKrrLoj-eOzyAxzEldOY9VyUPBD6MhGbwgTWsHtTGijX-37tOIJhj7CEvqCU0qX2vg7Gsb1vEwzhl1-GyPya2i8rz_f8Fz2D26LBusypbHIGfNWZhXZPMFnerA3Al31NBPn1afn3I0hYzSoXMW3dxbXdrtOh-lQHawlY4mYw_eyDRtokKgTX28V5nO1nTbsnFA';
 /* ========================================================== */
 
-const API_URL = `https://api.spotify.com/v1/me/top/tracks`;
+const API_URL = `https://api.spotify.com/v1/tracks`;
 
 export const getTracks = createAsyncThunk('Tracks/getTracks', async (payload, { rejectWithValue }) => {
   let result = null;

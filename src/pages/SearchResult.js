@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { PlayCircleOutlined } from '@ant-design/icons';
 import { ResponsiveRadar } from '@nivo/radar';
 
+import Spinner from '../components/Spinner';
 import ListItem from '../components/ListItem';
 import { getTracks } from '../slices/TracksSlice';
 import { Button } from 'antd';
@@ -31,15 +32,12 @@ const SearchResult = () => {
   const { id } = useParams();
   const { token } = useSelector((state) => state.token);
 
-  const { data: tracksData } = useSelector((state) => state.tracks);
+  const { data: tracksData, loading } = useSelector((state) => state.tracks);
   const dispatch = useDispatch();
 
   /* 한 앨범의 아티스트가 여러명일 수 있기 때문에 반복을 돌아 문자열로 처리했습니다. */
   let artistsName = '';
-  tracksData &&
-    tracksData?.album?.artists.map(
-      (aritst) => (artistsName += aritst.name + ''),
-    );
+  tracksData && tracksData?.album?.artists.map((aritst) => (artistsName += aritst.name + ''));
 
   useEffect(() => {
     token &&
@@ -47,14 +45,15 @@ const SearchResult = () => {
         getTracks({
           id,
           token,
-        }),
+        })
       );
   }, [dispatch, id, token]);
 
   return (
     <SearchResultContainer>
       {/* 헤더영역 */}
-      <div></div>
+      <div />
+      <Spinner visible={loading} />
 
       {/* 리스트 */}
       <div className="searchList">
@@ -72,19 +71,13 @@ const SearchResult = () => {
 
       {/* 스포티파이 재생 */}
       <div className="playBtn">
-        <Button
-          type="primary"
-          icon={<PlayCircleOutlined />}
-          size="large"
-          href={tracksData?.external_urls?.spotify}
-          target="_blank"
-        >
+        <Button type="primary" icon={<PlayCircleOutlined />} size="large" href={tracksData?.external_urls?.spotify} target="_blank">
           스포티파이에서 재생
         </Button>
       </div>
 
       {/* radar 그래프 */}
-      <div></div>
+      <div />
     </SearchResultContainer>
   );
 };
