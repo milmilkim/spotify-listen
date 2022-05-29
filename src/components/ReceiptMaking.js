@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 import React, { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { setIsLogin, setToken } from "../slices/TokenSlice";
 
 import styled from "styled-components";
-=======
-import React from 'react';
-import styled from 'styled-components';
->>>>>>> 376e98e24b0ca2dad42dc0dacc9e5c7ed337c75f
 
 const ReceiptMakingContainer = styled.div`
   padding: 10px;
@@ -57,7 +52,6 @@ const ReceiptMaking = () => {
 
   return (
     <ReceiptMakingContainer>
-<<<<<<< HEAD
       <div className="flex-row">
         <div className="img-container">
           <div className="spotify-logo">여기에 스포티파이 로고</div>
@@ -85,14 +79,6 @@ const ReceiptMaking = () => {
           </button>
         </div>
       </div>
-=======
-      {/* <div className="receipt">
-        <h2>들어보세요</h2>
-        <h3>{timeRanges}</h3>
-        <p>ORDER #000{btnValue}</p>
-        <p>{date}</p>
-      </div> */}
->>>>>>> 376e98e24b0ca2dad42dc0dacc9e5c7ed337c75f
     </ReceiptMakingContainer>
   );
 };
