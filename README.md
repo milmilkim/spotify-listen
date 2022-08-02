@@ -1,6 +1,10 @@
 # 들어보세요
 Spotify Open Api와 연동해서 음원 정보를 검색/조회하고 자주 재생한 곡을 기간별로 확인할 수 있는 서비스입니다.
 
+[https://incandescent-clafoutis-7161e7.netlify.app/](https://incandescent-clafoutis-7161e7.netlify.app/)
+
+https://incandescent-clafoutis-7161e7.netlify.app/
+
 ## 시작하기
 프로젝트 root에 `.env`파일을 생성합시다
 ```
@@ -22,3 +26,7 @@ React.js로 개발하였으며 Redux로 상태 관리를 합니다. Styled-compo
 ![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)
 
 netlify로 배포되었습니다.
+
+
+![image](https://user-images.githubusercontent.com/65494214/182382740-120cd36b-fb7d-440a-97ac-ab1eb5d60ea2.png)
+![image](https://user-images.githubusercontent.com/65494214/182382797-40bc47ed-14c0-4b6b-8ca4-9883251cf46b.png)
