@@ -3,8 +3,6 @@ Spotify Open Api와 연동해서 음원 정보를 검색/조회하고 자주 재
 
 [https://incandescent-clafoutis-7161e7.netlify.app/](https://incandescent-clafoutis-7161e7.netlify.app/)
 
-https://incandescent-clafoutis-7161e7.netlify.app/
-
 ## 시작하기
 프로젝트 root에 `.env`파일을 생성합시다
 ```
